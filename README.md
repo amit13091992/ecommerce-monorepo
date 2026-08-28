@@ -58,19 +58,15 @@ This repository provides a complete starting point for building a real e-commerc
 
 ## Architecture (high-level)
 
-Mermaid diagram (very high level):
+Simple diagram (GitHub-friendly Mermaid):
 
 ```mermaid
-flowchart LR
-  subgraph FRONTEND
-    W[Web (Vite + React)]
-  end
-  subgraph BACKEND
-    A[API (Express + TypeScript)]
-    DB[(Postgres + Prisma)]
-  end
-  W -->|HTTP/JSON (Axios)| A
-  A -->|ORM (Prisma)| DB
+graph LR
+  W[Web (Vite + React)]
+  A[API (Express + TypeScript)]
+  DB[(Postgres + Prisma)]
+  W --> A
+  A --> DB
 ```
 
 
