@@ -58,27 +58,27 @@ This repository provides a complete starting point for building a real e-commerc
 
 ## Architecture (high-level)
 
-A clearer architecture diagram showing how the main pieces interact (frontend, backend, database, and shared package). This version uses concise node labels and groups to render nicely on GitHub.
+A clearer architecture diagram showing how the main pieces interact (frontend, backend, database, and shared package). I simplified labels and removed parentheses so GitHub's Mermaid parser renders reliably.
 
 ```mermaid
 flowchart LR
-  subgraph FRONTEND[Frontend — apps/web]
-    W["Web\nVite + React\nReact Router\nReact Query\nZod + React Hook Form\nAxios"]
+  subgraph FRONTEND[Frontend - apps/web]
+    W["Web - Vite + React\nRouting, React Query, Forms, Axios"]
   end
 
-  subgraph BACKEND[Backend — apps/api]
-    A["API\nExpress + TypeScript\nZod validation\nJWT auth\nHelmet/CORS/Morgan"]
-    S["Services\nControllers\nRepositories"]
+  subgraph BACKEND[Backend - apps/api]
+    A["API - Express + TypeScript\nZod validation, JWT auth, Helmet/CORS/Morgan"]
+    S["Business Layer\nControllers -> Services -> Repos"]
     P["Prisma Client"]
     DB[(Postgres)]
   end
 
-  subgraph MONOREPO[Monorepo]
-    SH["packages/shared\n(types/constants)"]
-    DC["Docker Compose\n(Postgres service)"]
+  subgraph MONOREPO[Monorepo & Infra]
+    SH["packages/shared - types/constants"]
+    DC["Docker Compose - Postgres service"]
   end
 
-  W -->|HTTP/JSON (Axios)| A
+  W -- "HTTP / JSON" --> A
   A --> S
   S --> P
   P --> DB
@@ -87,7 +87,7 @@ flowchart LR
   DC --> DB
 ```
 
-This diagram is intended to be both human-readable and render correctly on GitHub.
+This version avoids parentheses in labels and in-edge text; it should render cleanly on GitHub.
 
 ## Repository structure
 
