@@ -62,8 +62,8 @@ Simple diagram (GitHub-friendly Mermaid):
 
 ```mermaid
 graph LR
-  W[Web (Vite + React)]
-  A[API (Express + TypeScript)]
+  W["Web: Vite + React"]
+  A["API: Express + TypeScript"]
   DB[(Postgres + Prisma)]
   W --> A
   A --> DB
