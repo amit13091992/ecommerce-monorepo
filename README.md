@@ -58,17 +58,36 @@ This repository provides a complete starting point for building a real e-commerc
 
 ## Architecture (high-level)
 
-Simple diagram (GitHub-friendly Mermaid):
+A clearer architecture diagram showing how the main pieces interact (frontend, backend, database, and shared package). This version uses concise node labels and groups to render nicely on GitHub.
 
 ```mermaid
-graph LR
-  W["Web: Vite + React"]
-  A["API: Express + TypeScript"]
-  DB[(Postgres + Prisma)]
-  W --> A
-  A --> DB
+flowchart LR
+  subgraph FRONTEND[Frontend — apps/web]
+    W["Web\nVite + React\nReact Router\nReact Query\nZod + React Hook Form\nAxios"]
+  end
+
+  subgraph BACKEND[Backend — apps/api]
+    A["API\nExpress + TypeScript\nZod validation\nJWT auth\nHelmet/CORS/Morgan"]
+    S["Services\nControllers\nRepositories"]
+    P["Prisma Client"]
+    DB[(Postgres)]
+  end
+
+  subgraph MONOREPO[Monorepo]
+    SH["packages/shared\n(types/constants)"]
+    DC["Docker Compose\n(Postgres service)"]
+  end
+
+  W -->|HTTP/JSON (Axios)| A
+  A --> S
+  S --> P
+  P --> DB
+  SH --> W
+  SH --> A
+  DC --> DB
 ```
 
+This diagram is intended to be both human-readable and render correctly on GitHub.
 
 ## Repository structure
 
